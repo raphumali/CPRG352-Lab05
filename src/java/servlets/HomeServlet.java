@@ -33,16 +33,16 @@ public class HomeServlet extends HttpServlet {
         String logout = request.getParameter("logout");
         String username = request.getParameter("username");
         request.setAttribute("username", username);
-        request.setAttribute("logout", "logout");
+        
         
         if(logout!=null){
-            sess.invalidate();
+           sess.invalidate();
             request.setAttribute("message", "You have logged out.");
-            response.sendRedirect("login");
+             response.sendRedirect("login");
             
         }else{
-            sess.setAttribute("username", username);
-             getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+           response.sendRedirect("home");
+           
         }
        
         

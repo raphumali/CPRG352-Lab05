@@ -39,10 +39,13 @@ public class LoginServlet extends HttpServlet {
         AccountService as = new AccountService();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String logout = request.getParameter("logout");
+        request.setAttribute("logout", "logout");
         request.setAttribute("username", username);
         request.setAttribute("password", password);
         
         HttpSession sess = request.getSession();
+        
         
         if(username == null || "".equals(username) || password == null || "".equals(password)){
              request.setAttribute("message", "Please enter username and password.");
@@ -54,7 +57,6 @@ public class LoginServlet extends HttpServlet {
              return;
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-        
     }
 
    

@@ -18,8 +18,8 @@ public class HomeServlet extends HttpServlet {
       HttpSession sess = request.getSession();
     
         if(sess.getAttribute("username") == null){
-            response.sendRedirect("login");
             sess.invalidate();
+            response.sendRedirect("login");
             return;
         } 
         getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
@@ -31,15 +31,20 @@ public class HomeServlet extends HttpServlet {
         
         HttpSession sess = request.getSession();
         String logout = request.getParameter("logout");
-        
+        String username = request.getParameter("username");
+        request.setAttribute("username", username);
         request.setAttribute("logout", "logout");
         
         if(logout!=null){
             sess.invalidate();
             request.setAttribute("message", "You have logged out.");
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            response.sendRedirect("login");
             
+        }else{
+            sess.setAttribute("username", username);
+             getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         }
+       
         
     }
 

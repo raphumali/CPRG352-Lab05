@@ -38,7 +38,7 @@ public class HomeServlet extends HttpServlet {
         if(logout!=null){
            sess.invalidate();
             request.setAttribute("message", "You have logged out.");
-             response.sendRedirect("login");
+              getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             
         }else{
            response.sendRedirect("home");
